@@ -1,8 +1,7 @@
 require('dotenv').config()
-
-const request = require('request');
 const yargs = require('yargs');
-
+const geocode = require ('./geocode/geocode.js')
+const weather = require ('./weather/weather.js')
 const argv = yargs
   .options({
     address: {
@@ -16,19 +15,21 @@ const argv = yargs
   .alias('help', 'h')
   .argv;
 
-var encodedAddress = encodeURIComponent(argv.address);
+geocode.geocodeAddress(argv.address, (errorMessage, results) => {
+  if (errorMessage) {
+    console.log(errorMessage);
+  } else {
+    //console.log(JSON.stringify(results, undefined, 2));
+    console.log(`Checking the weather at ${results.address}`);
+    weather.getWeather(results.latitude, results.longitude, (errorMessage, weatherResults) => {
+      if (errorMessage) {
+        console.log(errorMessage);
+      } else {
+        console.log(`It's currently ${weatherResults.temperature} but it feels like ${weatherResults.apparentTemperature}`)
+      }
+    });
 
-request({
-  url: `${process.env.MAPS_API_URL}&key=${process.env.MAPS_API_KEY}&address=${encodedAddress}`,
-  json: true
-}, (error, response, body) => {
-  if (error) {
-    console.log('There was an error connecting to Google Geocoding service.');
-  } else if (body.status === 'ZERO_RESULTS') {
-    console.log("Unable to find that address.");
-  } else if (body.status === 'OK'){
-  console.log(`Address: ${body.results[0].formatted_address}`);
-  console.log(`Latitude: ${body.results[0].geometry.location.lat}`)
-  console.log(`Longitute: ${body.results[0].geometry.location.lng}`)
-}
-})
+  }
+});
+
+// lat, lng, callback
