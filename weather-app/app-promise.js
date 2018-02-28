@@ -40,3 +40,6 @@ axios.get(geocodeUrl).then((response) => {
     console.log(e.message);
   }
 });
+
+// Consider adding additional info from Google API or Weather api
+// Add a default location if no location is specified.
