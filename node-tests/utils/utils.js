@@ -1,5 +1,5 @@
 module.exports.add = (a, b) => a + b;
-modul.exports.square = (x) => x * x ;
+module.exports.square = (x) => x * x ;
 
 function asyncTimeout(x) {
   return new Promise(resolve => {
