@@ -5,18 +5,23 @@ test('should add two numbers', () =>{
   expect(res).toBe(44);
 });
 
-test('it should async add two numbers', async () => {
-  expect.assertions(1);
-  var res = await utils.asyncAdd(3, 5);
-  expect(res).toEqual(8);
-
-});
-
-
 test('should square a number', () => {
   var res = utils.square(4);
   expect(res).toBe(16);
 })
+
+test('should async add two numbers', async () => {
+  expect.assertions(1);
+  var res = await utils.asyncAdd(3, 5);
+  expect(res).toEqual(8);
+});
+
+test('should async sqaure a number', async () => {
+  expect.assertions(1);
+  var res = await utils.asyncSquare(5);
+  expect(res).toEqual(25);
+});
+
 
 test('should set a first and last name', () => {
   var user = {location: 'Phoenixville', age: 25};

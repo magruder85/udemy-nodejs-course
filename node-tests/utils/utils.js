@@ -1,15 +1,7 @@
 module.exports.add = (a, b) => a + b;
+modul.exports.square = (x) => x * x ;
 
-// module.exports.asyncAdd = return new Promise(resolve => {
-//    (a, b, callback) => {
-//   setTimeout(() => {
-//     resolve(a + b);
-//   }, 1000);
-// };
-// });
-
-
-function resolveAfter2Seconds(x) {
+function asyncTimeout(x) {
   return new Promise(resolve => {
     setTimeout(() => {
       resolve(x);
@@ -18,11 +10,14 @@ function resolveAfter2Seconds(x) {
 }
 
 module.exports.asyncAdd = async function asyncAdd(a, b) {
-  var x = await resolveAfter2Seconds(a + b);
+  var x = await asyncTimeout(a + b);
   return x;
 }
 
-module.exports.square = (x) => x * x ;
+module.exports.asyncSquare = async function asyncSquare(x) {
+  var x = await asyncTimeout(x * x);
+  return x;
+}
 
 module.exports.setName = (user, fullName) => {
   var names = fullName.split(' ');
