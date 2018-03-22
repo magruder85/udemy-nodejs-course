@@ -6,7 +6,7 @@ I'm following a course on udemy, like below:
 https://www.udemy.com/the-complete-nodejs-developer-course-2
 
 ### Why?
-Why not?
+Why not? Seriously, javascript and node are interesting. 
 
 ### Updates/Changes
 * For test suites, I decided to go with Jest. Expect was donated to Jest so may as well learn that.
